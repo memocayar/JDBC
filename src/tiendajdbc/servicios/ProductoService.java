@@ -22,10 +22,10 @@ public class ProductoService {
         try {
             System.out.println("Nombre:");
             String nombre = leer.next();
-            
+
             System.out.println("Precio:");
             Double precio = leer.nextDouble();
-            
+
             System.out.println("Código de Fabricante:");
             int codigoFabricante = leer.nextInt();
 
@@ -38,10 +38,6 @@ public class ProductoService {
         } catch (Exception e) {
             throw e;
         }
-    }
-
-    public void modificarProducto(Producto producto) throws Exception {
-
     }
 
     public Collection<Producto> listarProducto() throws Exception {
@@ -222,4 +218,59 @@ public class ProductoService {
             throw e;
         }
     }
+
+    public Producto buscarProducto(Integer codigo) throws Exception {
+        try {
+            Collection<Producto> productos = listarProducto();
+
+            if (codigo > productos.size()) {
+                throw new Exception("No se ningún producto con ese código.");
+            } else {
+                Producto producto = dao.buscarproductoPorCodigo(codigo);
+                return producto;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void modificarProducto() throws Exception {
+        try {
+            System.out.println("Ingrese el código del producto que desea modificar");
+            Scanner leer = new Scanner(System.in).useDelimiter("\n");
+            Integer codigo = leer.nextInt();
+            Producto producto = buscarProducto(codigo);
+
+            System.out.println("¿Qué atributo desea modificar"
+                    + "\n1. Nombre"
+                    + "\n2. Precio"
+                    + "\n3. Fabricante");
+            int rta = leer.nextInt();
+
+            switch (rta) {
+                case 1: 
+                    System.out.println("Ingrese nuevo nombre:");
+                    String nombre = leer.next();
+                    producto.setNombre(nombre);
+                    break;
+                case 2: 
+                    System.out.println("Ingrese nuevo precio");
+                    Double precio = leer.nextDouble();
+                    producto.setPrecio(precio);
+                    break;
+                case 3:
+                    System.out.println("Ingrese nuevo código de fabricante");
+                    int codigoFab = leer.nextInt();
+                    producto.setCodigoFabricante(codigoFab);
+                    break;
+            }
+            
+            dao.modificarProducto(producto);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

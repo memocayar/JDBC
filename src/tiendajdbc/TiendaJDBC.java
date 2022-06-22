@@ -96,23 +96,26 @@ public class TiendaJDBC {
                         }
                         break;
                     case "g":
-                        /*
-                    System.out.println("\ng. Ingresar un fabricante a la base de datos");
-                    try {
-                        fabricanteService.ingresarFabricante();                           //tira error cuando metés uno que ya está
-                        fabricanteService.imprimirFabricantes();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("Error del sistema por \n" + e.getMessage());
-                    }
-                    System.out.println("\nh. Editar un producto con datos a elección.");
-                    try {
-                        productoService.modificarProducto();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println("Error del sistema por \n" + e.getMessage());
-                    }*/
+                        System.out.println("\ng. Ingresar un fabricante a la base de datos");
+                        try {
+                            fabricanteService.ingresarFabricante();                           
+                            fabricanteService.imprimirFabricantes();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Error del sistema por \n" + e.getMessage());
+                        }
                         break;
+
+                    case "h":
+                        System.out.println("\nh. Editar un producto con datos a elección.");
+                        try {
+                            productoService.modificarProducto();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Error del sistema por \n" + e.getMessage());
+                        }
+                        break;
+
                     case "i":
                         System.out.println("i. Imprimir todos los productos y su detalle");
                         try {
@@ -124,13 +127,14 @@ public class TiendaJDBC {
                         break;
                     case "j":
                         break;
-                    default: 
+                    default:
                         System.out.println("La opción ingresada no es válida");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Error del sistema por \n" + e.getMessage()); 
+                System.out.println("Error del sistema por \n" + e.getMessage());
             }
         } while (!"j".equals(op));
     }
+
 }
